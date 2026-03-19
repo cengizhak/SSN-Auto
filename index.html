@@ -1,76 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSN Auto Nozharovo - Car Listings</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .car-listing { display: flex; flex-wrap: wrap; }
-        .card { border: 1px solid #ccc; border-radius: 5px; width: 200px; margin: 10px; padding: 10px; position: relative; }
-        .contact-buttons { margin-top: 10px; }
-        .btn { text-decoration: none; color: white; background-color: #28a745; padding: 5px 10px; border-radius: 3px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSN Auto Nozharovo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f4f6f8; }
+    header { background:#1a1a1a; color:white; padding:20px; text-align:center; }
+    .container { padding:20px; display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+
+    .card {
+      background:white;
+      border-radius:10px;
+      overflow:hidden;
+      width:300px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      text-decoration:none;
+      color:black;
+      display:block;
+    }
+
+    .card img { width:100%; height:200px; object-fit:cover; }
+    .card p { padding:10px; margin:0; font-weight:bold; }
+
+    .button { display:inline-block; margin:10px 5px; padding:10px 15px; background:#007BFF; color:white; text-decoration:none; border-radius:5px; }
+    footer { text-align:center; padding:15px; background:#1a1a1a; color:white; margin-top:30px; }
+  </style>
 </head>
 <body>
-    <h1>Car Listings</h1>
-    <div class="car-listing">
-        <div class="card">
-            <h2>Honda Jazz 2004</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Honda Jazz 2005</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Fiat Panda 2006</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Opel Vectra 2004</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Opel Corsa 2007</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Toyota Aygo 2008</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Toyota Aygo 2007</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-        <div class="card">
-            <h2>BMW 116 2005</h2>
-            <div class="contact-buttons">
-                <a href="tel:+0000000000" class="btn">Contact by Phone</a>
-                <a href="https://wa.me/0000000000" class="btn">Contact on WhatsApp</a>
-            </div>
-        </div>
-    </div>
+
+<header>
+  <h2>SSN Auto Nozharovo</h2>
+</header>
+
+<div class="container" id="cars"></div>
+
+<a href="tel:+359893807886" class="button">Ara</a>
+<a href="https://wa.me/359893807886" class="button" target="_blank">WhatsApp</a>
+
+<footer>
+  <p>SSN Auto Nozharovo</p>
+</footer>
+
+<script>
+// ⚠️ THIS WILL BE YOUR OWN API (you or I will build backend)
+const API_URL = "https://your-server.com/api/cars";
+
+async function loadCars() {
+  const container = document.getElementById("cars");
+
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("API error");
+
+    const cars = await res.json();
+
+    container.innerHTML = "";
+
+    cars.forEach(car => {
+      const el = document.createElement("a");
+      el.href = car.url;
+      el.target = "_blank";
+      el.className = "card";
+
+      el.innerHTML = `
+        <img src="${car.image}" alt="car">
+        <p>${car.title} - ${car.price}</p>
+      `;
+
+      container.appendChild(el);
+    });
+
+  } catch (e) {
+    container.innerHTML = "<p>Veriler yüklenemedi</p>";
+  }
+}
+
+loadCars();
+</script>
+
 </body>
 </html>
