@@ -59,20 +59,28 @@ footer {
   padding:15px;
 }
 </style>
-<header style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; padding:12px 20px; gap:20px;">
-  <img src="https://i.imgur.com/MEr3VBl.png" style="height:136px; flex-shrink:0;">
-  
-  <div style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:16px;">
+</head>
+<header style="display:flex; align-items:center; justify-content:center; padding:12px 20px; gap:10px;">
+  <img src="https://i.imgur.com/MEr3VBl.png" style="height:136px;">
+  <div style="text-align:center;">
     <p style="margin:0; white-space:nowrap;">
       📞 <a href="tel:+359893807886" style="color:white; text-decoration:none;">+359 893 807 886</a>
     </p>
-    <a href="https://wa.me/359893807886" class="button" style="margin:0;">WhatsApp</a>
+    <a href="https://wa.me/359893807886" class="button whatsapp-btn">WhatsApp</a>
   </div>
+  <img src="https://i.imgur.com/w5hpqn1.png" style="height:136px;">
+</header>
+
 <style>
-/* Mobilde telefon ve WhatsApp arasındaki boşluk 24px olacak */
+/* WhatsApp butonuna boşluk eklemek için */
+.whatsapp-btn {
+  margin-top:16px; /* varsayılan boşluk */
+}
+
+/* Mobil ekranlarda boşluğu artır */
 @media (max-width: 480px) {
-  header div {
-    gap: 24px !important;
+  .whatsapp-btn {
+    margin-top:24px;
   }
 }
 </style>
